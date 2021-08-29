@@ -1,0 +1,33 @@
+[global_config]
+  enabled_plugins = LaunchpadBugURLHandler, LaunchpadCodeURLHandler, APTURLHandler, TerminatorThemes
+  always_split_with_profile = True
+[keybindings]
+  split_horiz = <Alt>underscore
+  split_vert = <Alt>plus
+[profiles]
+  [[default]]
+    background_darkness = 0.82
+    background_type = transparent
+    cursor_color = "#aaaaaa"
+  [[Nord]]
+    background_color = "#2E3440"
+    cursor_color = "#D8DEE9"
+    show_titlebar = False
+    palette = "#3b4252:#bf616a:#a3be8c:#ebcb8b:#81a1c1:#b48ead:#88c0d0:#e5e9f0:#4c566a:#bf616a:#a3be8c:#ebcb8b:#81a1c1:#b48ead:#8fbcbb:#eceff4"
+  [[After Dark]]
+    background_color = "#10111b"
+    background_darkness = 0.82
+    background_type = transparent
+    cursor_color = "#aaaaaa"
+    palette = "#2e3436:#ef4a9e:#00d2bc:#e7ca7a:#9399fa:#ca5bcc:#86d079:#d3d7cf:#555753:#ef4a9e:#00d2bc:#e7ca7a:#9399fa:#ca5bcc:#86d079:#eeeeec"
+    use_theme_colors = True
+[layouts]
+  [[default]]
+    [[[window0]]]
+      type = Window
+      parent = ""
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+      profile = Nord
+[plugins]
