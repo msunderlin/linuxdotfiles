@@ -56,6 +56,8 @@ Plug 'xolox/vim-misc'
 " vim-easytags
 " https://github.com/xolox/vim-easytags
 Plug 'xolox/vim-easytags'
+"emmet expanding html
+Plug 'mattn/emmet-vim'
 
 " Tagbar
 " https://github.com/majutsushi/tagbar
@@ -71,6 +73,11 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " Intelisense
 Plug 'sheerun/vim-polyglot'
 Plug 'stephpy/vim-php-cs-fixer'
+Plug 'preservim/nerdcommenter'
+"statusbar
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+"commenter
 Plug 'preservim/nerdcommenter'
 call plug#end()
 
@@ -254,6 +261,13 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
+
+"Airline statusbarconfig
+let g:airline_theme='nord_minimal'
+
+"NERDcommenterSetup default /cc
+let g:NERDCreateDefaultMappings = 1
+
 let g:coc_global_extensions = [
     \ 'coc-tsserver',
     \ 'coc-json',
@@ -277,7 +291,6 @@ let g:php_cs_fixer_config = "default"                  " options: --config
 "let g:php_cs_fixer_fixers_list = "linefeed,short_tag" " options: --fixers
 "let g:php_cs_fixer_config_file = '.php_cs'            " options: --config-file
 " End of php-cs-fixer version 1 config params
-
 " If you use php-cs-fixer version 2.x
 let g:php_cs_fixer_rules = "@PSR12"          " options: --rules (default:@PSR2)
 "let g:php_cs_fixer_cache = ".php_cs.cache" " options: --cache-file
