@@ -1,9 +1,10 @@
 " config.vim
 
-let mapleader = ","
+let mapleader = " "
 
 set nocompatible
 set number                " Show numbers on the left
+set relativenumber " Show relativenumber from your line
 set hlsearch              " Highlight search results
 set ignorecase            " Search ingnoring case
 set smartcase             " Do not ignore case if the search patter has uppercase
@@ -19,7 +20,6 @@ set noswapfile            " Do not leve any backup files
 set mouse=a               " Enable mouse on all modes
 set clipboard=unnamed,unnamedplus     " Use the OS clipboard
 set showmatch
-set termguicolors
 set splitright splitbelow
 set list lcs=tab:\¦\      "(here is a space)
 let &t_SI = "\e[6 q"      " Make cursor a line in insert
@@ -48,8 +48,13 @@ endif
 " Plugins
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-fugitive'
 Plug 'arcticicestudio/nord-vim'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } " File navigator
+Plug 'preservim/tagbar'
+Plug 'preservim/nerdcommenter'
+Plug 'preservim/nerdtree' | 
+        \Plug 'Xuyuanp/nerdtree-git-plugin' | 
+        \Plug 'ryanoasis/vim-devicons'
 " vim-misc
 " https://github.com/xolox/vim-misc
 Plug 'xolox/vim-misc'
@@ -59,9 +64,6 @@ Plug 'xolox/vim-easytags'
 "emmet expanding html
 Plug 'mattn/emmet-vim'
 
-" Tagbar
-" https://github.com/majutsushi/tagbar
-Plug 'majutsushi/tagbar'
 " OMG - insanely awesome fuzzy search and blazing fast grep
 " https://github.com/junegunn/fzf (parent project)
 " https://github.com/junegunn/fzf.vim (more extensive wrapper)
@@ -73,12 +75,9 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " Intelisense
 Plug 'sheerun/vim-polyglot'
 Plug 'stephpy/vim-php-cs-fixer'
-Plug 'preservim/nerdcommenter'
+Plug 'maksimr/vim-jsbeautify'
 "statusbar
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-"commenter
-Plug 'preservim/nerdcommenter'
 call plug#end()
 
 colorscheme nord
@@ -88,9 +87,6 @@ filetype plugin on
 
 
 " Use Ctrl-k Ctrl-k to open a sidebar with the list of files
-map <C-k><C-k> :NERDTreeToggle<cr>
-"Use Ctrl-P to open the fuzzy file opener
-nnoremap <C-p> :Files<cr>
 
 
 
@@ -261,10 +257,6 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
-
-"Airline statusbarconfig
-let g:airline_theme='nord_minimal'
-
 "NERDcommenterSetup default /cc
 let g:NERDCreateDefaultMappings = 1
 
@@ -302,3 +294,30 @@ let g:php_cs_fixer_enable_default_mapping = 1     " Enable the mapping by defaul
 let g:php_cs_fixer_dry_run = 0                    " Call command with dry-run option
 let g:php_cs_fixer_verbose = 0                    " Return the output of command if 1, else an inline information.
 autocmd BufWritePost *.php silent! call PhpCsFixerFixFile()
+
+let g:NERDTreeWinPos = "right"
+let g:tagbar_left=1
+    " file stuff <leader>f
+nnoremap <leader>fzf :Files<cr>
+nnoremap <leader>fo :TagbarToggle<cr>
+nnoremap <leader>ft :NERDTreeToggle<cr>
+"Window Splits and movements
+nnoremap <leader>ws <C-w>s<cr>
+nnoremap <leader>wv <C-w>v<cr>
+nnoremap <leader>w= <C-w>=<cr>
+
+".vimrc
+map <leader>bf :call JsBeautify()<cr>
+" or
+autocmd FileType javascript noremap <leader>bf :call JsBeautify()<cr>
+" for json
+autocmd FileType json noremap <leader>bf :call JsonBeautify()<cr>
+" for jsx
+autocmd FileType jsx noremap <leader>bf :call JsxBeautify()<cr>
+" for html
+autocmd FileType html noremap <leader>bf :call HtmlBeautify()<cr>
+" for css or scss
+autocmd FileType css noremap <leader>bf :call CSSBeautify()<cr>
+
+" enable bashrc in vimrc
+set shellcmdflag=-ic
